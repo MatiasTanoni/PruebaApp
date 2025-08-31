@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular'; 
+import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
-
+import { Auth } from 'src/app/services/auth/auth';
 
 @Component({
   selector: 'app-login',
@@ -10,15 +10,17 @@ import { FormsModule } from '@angular/forms';
   imports: [IonicModule, FormsModule],
 })
 export class LoginComponent implements OnInit {
-  
+
   email: string = '';
   password: string = '';
 
-  constructor() {}
+  constructor(private auth: Auth) {
+  }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  onLogin() {
+  async onLogin() {
+    const { success, message } = await this.auth.login(this.email, this.password)
     console.log('Correo:', this.email);
     console.log('Contraseña:', this.password);
   }
