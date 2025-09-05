@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from "./components/login/login.component";
 import { RegisterComponent } from 'src/app/pages/auth/components/register/register.component';
+
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.page.html',
