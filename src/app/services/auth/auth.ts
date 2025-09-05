@@ -17,13 +17,14 @@ export class Auth {
   }
 
   async login(email: string, password: string): Promise<{ success: boolean; message: string }> {
+    console.log("email: " + email + ", password: " + password);
     const { data, error } = await this.supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
 
     if (error) {
-      console.log(error);
+      console.log("ERROR CONSOLA: " + error);
       return { success: false, message: 'Credenciales inválidas.' };
     }
 
@@ -47,4 +48,45 @@ export class Auth {
     }
   }
 
+  async register(email: string, password: string, name: string, age: number): Promise<{ success: boolean; message: string }> {
+    try {
+      const { data, error } = await this.supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      console.log("data: ", data);
+      const user = data.user;
+
+      if (!user) {
+        return { success: false, message: 'No se pudo obtener el usuario después del registro.' };
+      }
+
+      console.log("user ID: " + user.id);
+      console.log("name: " + name);
+      console.log("age: " + age);
+      const { error: insertError } = await this.supabase.from('users').insert([
+        {
+          id: user.id,
+          name: name,
+          age: age,
+        },
+      ]);
+      
+      if (insertError) {
+        return { success: false, message: 'Registro fallido al guardar los datos.' };
+      }
+
+      if (error) {
+        throw error;
+      }
+
+      this.router.navigate(['/home'], { replaceUrl: true });
+      return { success: true, message: 'Registro exitoso.' };
+
+    } catch (error) {
+      console.error("Error en el registro:", error);
+      return { success: false, message: 'Error en el registro.' };
+    }
+  }
 }
