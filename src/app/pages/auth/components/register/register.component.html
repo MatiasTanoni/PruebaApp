@@ -1,5 +1,5 @@
 <div class="bg-gray-900 flex items-center justify-center min-h-screen px-4">
-  <form [FormGroup]="formulario" (ngSubmit)="onRegister()"
+  <form [formGroup]="formulario" (ngSubmit)="onRegister()"
     class="bg-gray-800 rounded-2xl p-8 shadow-lg w-full max-w-md text-gray-200">
 
     <h1 class="text-2xl font-semibold text-center mb-6 text-red-500">Registro</h1>
@@ -7,8 +7,8 @@
     <div class="mb-4">
       <label for="name" class="block text-sm font-medium mb-1 text-gray-300">Nombre</label>
       <input id="name" type="text" formControlName="name" placeholder="Tu nombre" class="w-full px-4 py-2 rounded-xl border border-gray-700 bg-gray-900 text-gray-200
-                    focus:outline-none focus:ring-2 focus:ring-red-500" />
-      @If(formulario.get('name')?.invalid && formulario.get('name')?.touched) {
+        focus:outline-none focus:ring-2 focus:ring-red-500" />
+      @if (formulario.get('name')?.invalid && formulario.get('name')?.touched) {
       <div class="text-red-500 text-sm mt-1">
         El nombre es obligatorio.
       </div>
@@ -18,8 +18,8 @@
     <div class="mb-4">
       <label for="age" class="block text-sm font-medium mb-1 text-gray-300">Edad</label>
       <input id="age" type="number" formControlName="age" placeholder="Tu edad" class="w-full px-4 py-2 rounded-xl border border-gray-700 bg-gray-900 text-gray-200
-                    focus:outline-none focus:ring-2 focus:ring-red-500" />
-      @If(formulario.get('age')?.invalid && formulario.get('age')?.touched) {
+        focus:outline-none focus:ring-2 focus:ring-red-500" />
+      @if (formulario.get('age')?.invalid && formulario.get('age')?.touched) {
       <div class="text-red-500 text-sm mt-1">
         Ingresa una edad válida (mayor a 0).
       </div>
@@ -29,8 +29,8 @@
     <div class="mb-4">
       <label for="email" class="block text-sm font-medium mb-1 text-gray-300">Correo</label>
       <input id="email" type="email" formControlName="email" placeholder="tu@email.com" class="w-full px-4 py-2 rounded-xl border border-gray-700 bg-gray-900 text-gray-200
-                    focus:outline-none focus:ring-2 focus:ring-red-500" />
-      @If(formulario.get('email')?.invalid && formulario.get('email')?.touched) {
+        focus:outline-none focus:ring-2 focus:ring-red-500" />
+      @if (formulario.get('email')?.invalid && formulario.get('email')?.touched) {
       <div class="text-red-500 text-sm mt-1">
         Ingresa un correo válido.
       </div>
@@ -40,8 +40,8 @@
     <div class="mb-4">
       <label for="password" class="block text-sm font-medium mb-1 text-gray-300">Contraseña</label>
       <input id="password" type="password" formControlName="password" placeholder="••••••••" class="w-full px-4 py-2 rounded-xl border border-gray-700 bg-gray-900 text-gray-200
-                    focus:outline-none focus:ring-2 focus:ring-red-500" />
-      @If(formulario.get('password')?.invalid && formulario.get('password')?.touched) {
+        focus:outline-none focus:ring-2 focus:ring-red-500" />
+      @if (formulario.get('password')?.invalid && formulario.get('password')?.touched) {
       <div class="text-red-500 text-sm mt-1">
         La contraseña debe tener al menos 6 caracteres.
       </div>
@@ -51,8 +51,8 @@
     <div class="mb-6">
       <label for="confirmPassword" class="block text-sm font-medium mb-1 text-gray-300">Confirmar Contraseña</label>
       <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="••••••••" class="w-full px-4 py-2 rounded-xl border border-gray-700 bg-gray-900 text-gray-200
-                    focus:outline-none focus:ring-2 focus:ring-red-500" />
-      @If(formulario.errors?.mismatch && formulario.get('confirmPassword')?.touched) {
+        focus:outline-none focus:ring-2 focus:ring-red-500" />
+      @if (formulario.get('confirmPassword')?.errors?.['iguales'] && formulario.get('confirmPassword')?.touched) {
       <div class="text-red-500 text-sm mt-1">
         Las contraseñas no coinciden.
       </div>
@@ -64,5 +64,4 @@
       Registrarse
     </button>
   </form>
-
 </div>
